@@ -1,0 +1,78 @@
+@import "./includes/_vars";
+@import "includes/includes";
+
+.page-contents {
+  max-width: 1120px;
+  width: 100%;
+}
+
+.divider {
+  width: 100%;
+  border-top: 2px dotted $jd-orange;
+  margin: 25px 0px;
+}
+
+.issues-contents {
+  font-size: 16px;
+}
+
+.plank {
+  .plank-title {
+    display: flex;
+    align-items: center;
+    font-size: 18px;
+    margin: 10px 0;
+    padding: 0;
+    border: none;
+    img {
+      height: 15px;
+      margin-right: 20px;
+      cursor: pointer;
+    }
+    img:hover {
+      filter: brightness(75%);
+    }
+    img:active {
+      filter: brightness(50%);
+    }
+  }
+}
+
+.issue-intro {
+  font-size: 18px;
+  margin-bottom: 15px;
+  margin-top: 10px;
+}
+
+.policy-section-title-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  .icon-container {
+    width: 30%;
+    max-width: 150px;
+  }
+
+  .text-container {
+    max-width: calc(100% - 180px);
+  }
+}
+
+@include breakpoint(mobile) {
+  .policy-section-title-container {
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+
+    .icon-container {
+      width: 100%;
+    }
+
+    .text-container {
+      margin-top: 20px;
+      width: 100%;
+      max-width: none;
+    }
+  }
+}

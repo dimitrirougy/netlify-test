@@ -1,0 +1,120 @@
+@import "includes/includes";
+
+$form-column-gap: 30px;
+$form-input-maxwidth: 410px;
+$column1-maxwidth: 2 * $form-input-maxwidth + $form-column-gap;
+
+div.join-page-content-container {
+  background-size: cover;
+  background-position-x: right;
+  width: 100%;
+  max-width: 1920px;
+  padding: 1rem;
+}
+
+.full-height {
+  min-height: calc(100vh - 50px);
+}
+
+div.splash {
+  font-family: $jd-sans;
+  margin: 0 auto;
+  padding: 50px;
+
+  @include breakpoint(mobile) {
+    padding-top: 50px;
+  }
+
+  div.hed,
+  div.subhed {
+    color: white;
+  }
+
+  div.hed {
+    font-weight: bold;
+    font-size: 35px;
+    line-height: 35px;
+    text-transform: uppercase;
+  }
+
+  div.subhed {
+    font-size: 22px;
+    line-height: 22px;
+  }
+
+  form.splash-signup {
+    flex-direction: column;
+
+    .inputs-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      width: 100%;
+    }
+
+    input,
+    input::placeholder {
+      font-weight: bold;
+      color: $jd-dark-blue;
+      font-family: "Montserrat", sans-serif;
+      font-size: 22px;
+    }
+
+    .splash-input {
+      height: 60px;
+      width: 48%;
+      border-radius: 0px;
+      border: 1px solid $jd-dark-blue;
+    }
+
+    input[type="submit"] {
+      border: 0px;
+      height: 60px;
+      font-size: 35px;
+      margin-top: 10px;
+      width: 100%;
+    }
+
+    @include breakpoint(mobile) {
+      .splash-input {
+        height: 50px;
+      }
+
+      input[type="submit"] {
+        height: 50px;
+      }
+    }
+  }
+
+  @include breakpoint(mobile) {
+    .content-container.five {
+      padding-left: 10px;
+      margin-left: 0px;
+      border: none;
+    }
+
+    li {
+      margin-bottom: 0px;
+    }
+  }
+
+  .content-container {
+    padding-left: 50px;
+    margin-left: 50px;
+    border-left: 1px solid $jd-dark-blue;
+
+    div.content {
+      color: $jd-dark-blue;
+      font-family: $jd-sans;
+
+      h3 {
+        font-weight: bold;
+        color: $jd-dark-blue;
+      }
+      ul {
+        margin-left: 0;
+        list-style: disc inside;
+      }
+    }
+  }
+}

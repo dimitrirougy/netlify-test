@@ -1,98 +1,215 @@
-import React from 'react'
-import { Link } from 'gatsby'
-import github from '../img/github-icon.svg'
-import logo from '../img/logo.svg'
+import React from "react";
+import Link from "gatsby-link";
+import PropTypes from "prop-types";
+import "../style/navbar.scss";
+import Responsive from "react-responsive";
+import { slide as Menu } from "react-burger-menu";
 
-const Navbar = class extends React.Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      active: false,
-      navBarActiveClass: '',
-    }
-  }
+// const DesktopOrTablet = props => <Responsive {...props} minWidth={992} />;
+// const Mobile = props => <Responsive {...props} minWidth={992} />;
+// const Tablet = props => <Responsive {...props} minWidth={768} maxWidth={991} />;
+const Mobile = props => <Responsive {...props} maxWidth={767} />;
+const Default = props => <Responsive {...props} minWidth={768} />;
 
-  toggleHamburger = () => {
-    // toggle the active boolean in the state
-    this.setState(
-      {
-        active: !this.state.active,
-      },
-      // after state has been updated,
-      () => {
-        // set the class in state for the navbar accordingly
-        this.state.active
-          ? this.setState({
-              navBarActiveClass: 'is-active',
-            })
-          : this.setState({
-              navBarActiveClass: '',
-            })
-      }
-    )
-  }
+const links = [
+  { display: "Home", href: "/home" },
+  { display: "About", href: "/about" },
+  { display: "Platform", href: "/issues" },
+  {
+    display: "Candidates",
+    href: "/candidates",
+    children: [
+      { display: "Nominate", href: "/nominate" },
+      { display: "2020 Candidates", href: "/candidates" }
+    ]
+  },
+  // { display: 'News', href: '/news'},
+  // { display: 'Actions', href: '/actions'},
+  { display: "Store", href: "https://shop.justicedemocrats.com" },
+  { display: "Volunteer", href: "/volunteer" }
+];
+
+class Navbar extends React.Component {
+  state = { open: false };
+
+  handleMenuChange = ({ isOpen }) => this.setState({ open: isOpen });
+  closeMenu = () => this.setState({ open: false });
 
   render() {
-    return (
-      <nav
-        className="navbar is-transparent"
-        role="navigation"
-        aria-label="main-navigation"
-      >
-        <div className="container">
-          <div className="navbar-brand">
-            <Link to="/" className="navbar-item" title="Logo">
-              <img src={logo} alt="Kaldi" style={{ width: '88px' }} />
-            </Link>
-            {/* Hamburger menu */}
-            <div
-              className={`navbar-burger burger ${this.state.navBarActiveClass}`}
-              data-target="navMenu"
-              onClick={() => this.toggleHamburger()}
+    const { path } = this.props;
+    if (path === "/" || path === "") {
+      return (
+        <div className="navbar" style={{ position: "fixed" }}>
+          <div className="navbar desktop">
+            <HeaderLogo />
+            <Link
+              to="/home"
+              className="orange-bg bold-m navbar-enter-button"
             >
-              <span />
-              <span />
-              <span />
-            </div>
-          </div>
-          <div
-            id="navMenu"
-            className={`navbar-menu ${this.state.navBarActiveClass}`}
-          >
-            <div className="navbar-start has-text-centered">
-              <Link className="navbar-item" to="/about">
-                About
-              </Link>
-              <Link className="navbar-item" to="/products">
-                Products
-              </Link>
-              <Link className="navbar-item" to="/blog">
-                Blog
-              </Link>
-              <Link className="navbar-item" to="/contact">
-                Contact
-              </Link>
-              <Link className="navbar-item" to="/contact/examples">
-                Form Examples
-              </Link>
-            </div>
-            <div className="navbar-end has-text-centered">
-              <a
-                className="navbar-item"
-                href="https://github.com/netlify-templates/gatsby-starter-netlify-cms"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <span className="icon">
-                  <img src={github} alt="Github" />
-                </span>
-              </a>
-            </div>
+              <div style={{ textAlign: "center" }}> Enter Site </div>
+            </Link>
           </div>
         </div>
-      </nav>
-    )
+      );
+    }
+
+    return (
+      <div className="navbar" style={{ position: "fixed" }}>
+        <Default>
+          <div className="hanger-navbar-container">
+            <div className="navbar desktop">
+              <div className="nav-social-container">
+                <TwitterButton />
+                <FacebookButton />
+              </div>
+              <HeaderLogo />
+              <a
+                href="/donate"
+                target="_blank"
+                className="light-blue-bg bold-m navbar-donate-button"
+              >
+                <div>Donate</div>
+              </a>
+            </div>
+            <div className="navbar-hanger">
+              {links.map(({ display, href, children }, i) => (
+                <div
+                  className={`hanger-link-container ${display.toLowerCase()}`}
+                  key={"nav-link-" + i}
+                >
+                  <DesktopNavLink display={display} href={href} />
+
+                  {(children || []).map((child, idx) => (
+                    <DesktopNavLink
+                      {...child}
+                      isChild={true}
+                      heightOffset={(idx + 1) * 50}
+                      key={"nav-link-op-" + idx}
+                    />
+                  ))}
+                </div>
+              ))}
+            </div>
+          </div>
+        </Default>
+
+        <Mobile>
+          <div className="navbar mobile">
+            <div className="nav-social-container">
+              <TwitterButton />
+              <FacebookButton />
+            </div>
+            <HeaderLogo />
+            <Menu
+              right={true}
+              onStateChange={this.handleMenuChange}
+              isOpen={this.state.open}
+            >
+              {links.map(({ display, href, children }, linkIndex) => (
+                <div onClick={this.closeMenu} key={"mobile-nav-link-" + linkIndex}>
+                  <MobileNavLink display={display} href={href} />
+                  {(children || []).map((child, optionIndex) => (
+                    <MobileNavLink
+                      display={child.display}
+                      href={child.href}
+                      isChild={true}
+                      key={"mobile-nav-link-op-" + optionIndex}
+                    />
+                  ))}
+                </div>
+              ))}
+
+              <div onClick={this.closeMenu}>
+                <a
+                  className="bold-m"
+                  href="https://justicedemocrats.com/donate"
+                  target="_blank"
+                >
+                  <div> Donate </div>
+                </a>
+              </div>
+            </Menu>
+          </div>
+        </Mobile>
+
+        <Default>
+          <div />
+        </Default>
+      </div>
+    );
   }
 }
 
-export default Navbar
+Navbar.propTypes = {
+  path: PropTypes.string.isRequired
+};
+
+export default Navbar;
+
+const TwitterButton = () => (
+  <a
+    className="nav-social"
+    href="https://twitter.com/justicedems"
+    target="_blank"
+  >
+    <img src="/assets/twitter.svg" alt="twitter" />
+  </a>
+);
+const FacebookButton = () => (
+  <a
+    className="nav-social"
+    href="https://www.facebook.com/justicedemocrats/"
+    target="_blank"
+  >
+    <img src="/assets/facebook.svg" alt="facebook" />
+  </a>
+);
+
+const DonateLink = () => (
+  <a href="/donate" target="_blank" className="bold-m light-blue-bg">
+    Donate
+  </a>
+);
+const HeaderLogo = () => (
+  <Link to="/home" style={{ height: 30 }} className="header-logo">
+    <img
+      style={{ height: 30 }}
+      src="/assets/jd-logo-horiz.svg"
+      alt="Justice Democrats"
+    />
+  </Link>
+);
+
+const DesktopNavLink = ({ href, display, isChild, heightOffset }) =>
+  href.startsWith("https://") ? (
+    <a
+      className={`hanger-link bold-m ${isChild ? "child" : ""}`}
+      href={href}
+      target="_blank"
+    >
+      <div style={{ width: "100%" }}> {display} </div>
+    </a>
+  ) : (
+    <Link
+      className={`hanger-link bold-m ${display.toLowerCase()} ${
+        isChild ? "child" : ""
+      }`}
+      to={href}
+    >
+      <div style={{ width: "100%" }}> {display} </div>
+    </Link>
+  );
+
+const MobileNavLink = ({ href, display, isChild }) => {
+  const className = isChild ? "medium-m font-size-16" : "bold-m";
+
+  return href.startsWith("https://") ? (
+    <a className={className} href={href} target="_blank">
+      <div> {display} </div>
+    </a>
+  ) : (
+    <Link className={className} to={href}>
+      <div> {display} </div>
+    </Link>
+  );
+};

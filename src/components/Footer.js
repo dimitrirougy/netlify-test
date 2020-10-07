@@ -1,115 +1,97 @@
 import React from 'react'
-import { Link } from 'gatsby'
 
-import logo from '../img/logo.svg'
-import facebook from '../img/social/facebook.svg'
-import instagram from '../img/social/instagram.svg'
-import twitter from '../img/social/twitter.svg'
-import vimeo from '../img/social/vimeo.svg'
-
-const Footer = class extends React.Component {
+export default class Footer extends React.Component {
   render() {
+    const {
+      generalEmail,
+      pressEmail,
+      address,
+      quickLinks,
+      socialIcons,
+      paidForMessage,
+      copyright,
+      phone,
+    } = this.props;
+
     return (
-      <footer className="footer has-background-black has-text-white-ter">
-        <div className="content has-text-centered">
-          <img
-            src={logo}
-            alt="Kaldi"
-            style={{ width: '14em', height: '10em' }}
-          />
-        </div>
-        <div className="content has-text-centered has-background-black has-text-white-ter">
-          <div className="container has-background-black has-text-white-ter">
-            <div style={{ maxWidth: '100vw' }} className="columns">
-              <div className="column is-4">
-                <section className="menu">
-                  <ul className="menu-list">
-                    <li>
-                      <Link to="/" className="navbar-item">
-                        Home
-                      </Link>
-                    </li>
-                    <li>
-                      <Link className="navbar-item" to="/about">
-                        About
-                      </Link>
-                    </li>
-                    <li>
-                      <Link className="navbar-item" to="/products">
-                        Products
-                      </Link>
-                    </li>
-                    <li>
-                      <Link className="navbar-item" to="/contact/examples">
-                        Form Examples
-                      </Link>
-                    </li>
-                    <li>
-                      <a
-                        className="navbar-item"
-                        href="/admin/"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                      >
-                        Admin
-                      </a>
-                    </li>
-                  </ul>
-                </section>
-              </div>
-              <div className="column is-4">
-                <section>
-                  <ul className="menu-list">
-                    <li>
-                      <Link className="navbar-item" to="/blog">
-                        Latest Stories
-                      </Link>
-                    </li>
-                    <li>
-                      <Link className="navbar-item" to="/contact">
-                        Contact
-                      </Link>
-                    </li>
-                  </ul>
-                </section>
-              </div>
-              <div className="column is-4 social">
-                <a title="facebook" href="https://facebook.com">
-                  <img
-                    src={facebook}
-                    alt="Facebook"
-                    style={{ width: '1em', height: '1em' }}
-                  />
-                </a>
-                <a title="twitter" href="https://twitter.com">
-                  <img
-                    className="fas fa-lg"
-                    src={twitter}
-                    alt="Twitter"
-                    style={{ width: '1em', height: '1em' }}
-                  />
-                </a>
-                <a title="instagram" href="https://instagram.com">
-                  <img
-                    src={instagram}
-                    alt="Instagram"
-                    style={{ width: '1em', height: '1em' }}
-                  />
-                </a>
-                <a title="vimeo" href="https://vimeo.com">
-                  <img
-                    src={vimeo}
-                    alt="Vimeo"
-                    style={{ width: '1em', height: '1em' }}
-                  />
+      <div>
+        <div className="my-footer dark-blue-bg row" style={{ color: 'white' }}>
+          <div className="footer-section six columns">
+            <div className="footer-section-title extra-bold-m">Contact Us</div>
+            <div className="footer-section-contents medium-m standard-text contact">
+              <div>
+                General:
+                <a
+                  href={`mailto:${generalEmail}`}
+                  target="_blank"
+                  className="bold-m"
+                >
+                  {generalEmail}
                 </a>
               </div>
+
+              <div>
+                Press:
+                <a
+                  href={`mailto:${pressEmail}`}
+                  target="_blank"
+                  className="bold-m"
+                >
+                  {pressEmail}
+                </a>
+              </div>
+
+              <div>
+                Phone:
+                <a href={`tel:${phone}`} target="_blank" className="bold-m">
+                  {phone}
+                </a>
+              </div>
+
+              <div>{address}</div>
+            </div>
+          </div>
+
+          <div className="footer-section six columns">
+            <div className="footer-section-title extra-bold-m">Quick Links</div>
+            <div className="footer-section-contents quick-links standard-text">
+              {quickLinks.map(({ text, url }, i) => (
+                <a href={url} target="_blank" className="bold-m" key={"footer-link-" + i}>
+                  {text}
+                </a>
+              ))}
+            </div>
+
+            <div className="social-icons">
+              {socialIcons.filter(({ type }) => type === 'social').map(({
+                icon,
+                url,
+              }, i) => (
+                <a href={url} target="_blank" key={"social-link-" + i}>
+                  <img alt={url + " logo"} src={icon} />
+                </a>
+              ))}
+
+              <div className="icon-divider" />
+
+              {socialIcons.filter(({ type }) => type === 'contact').map(({
+                icon,
+                url,
+              }, i) => (
+                <a href={url} target="_blank" key={"contact-link-" + i}>
+                  <img alt={url + " logo"} src={icon} />
+                </a>
+              ))}
             </div>
           </div>
         </div>
-      </footer>
+        <div className="disclaimer">
+          <div className="medium-m dark-blue-color paid-for">
+            {paidForMessage}
+          </div>
+          <div className="light-m dark-blue-color copyright">{copyright}</div>
+        </div>
+      </div>
     )
   }
 }
-
-export default Footer

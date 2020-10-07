@@ -1,0 +1,252 @@
+@import "includes/includes";
+
+.hanger-navbar-container {
+  width: 100%;
+  overflow: visible;
+}
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center !important;
+  width: 100%;
+  height: 50px;
+  min-height: auto !important;
+  z-index: 100000;
+  font-size: 18px;
+
+  .mobile {
+    padding-left: 25px;
+    padding-right: 25px;
+
+    .header-logo {
+      max-width: 200px;
+    }
+
+    .nav-social-container {
+      width: 60px;
+    }
+  }
+
+  .desktop {
+    .nav-social-container {
+      margin-left: 50px;
+    }
+  }
+
+  .nav-social-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 50px;
+    width: 80px;
+
+    .nav-social {
+      width: 30px;
+      height: 30px;
+    }
+    .nav-social:hover {
+      filter: brightness(0.4);
+    }
+  }
+  .navbar-donate-button, .navbar-enter-button {
+    width: 150px;
+    text-decoration: none;
+    color: white;
+    padding: 10px;
+    text-transform: uppercase;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+.navbar-hanger {
+  height: 50px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: absolute;
+  top: 50px;
+  width: 100%;
+
+  .hanger-link-container {
+    background-color: rgba($jd-dark-dark-blue, 0.7);
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+
+    .child {
+      display: none;
+      position: relative;
+      background-color: rgba($jd-dark-dark-blue, 0.7);
+    }
+
+    &:hover {
+      .child {
+        display: flex;
+      }
+    }
+  }
+
+  .hanger-link {
+    color: white;
+    text-transform: uppercase;
+    padding-top: 0.5em;
+    padding-bottom: 0.5em;
+    min-height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    width: 100%;
+
+    &:hover {
+      background-color: rgba($jd-dark-dark-blue, 0.9);
+    }
+  }
+
+  .volunteer,
+  .join {
+    background-color: $jd-orange;
+    width: 150px;
+  }
+}
+
+ul.splash-navbar {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  @include breakpoint(mobile) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  width: 100%;
+  height: 100%;
+  li:not(.empty) {
+    height: 100px;
+    @include breakpoint(mobile) {
+      height: 50px;
+    }
+    width: 100%;
+  }
+  li.img {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    min-width: 160px;
+    max-width: 600px;
+    grid-column-start: 2;
+    @include breakpoint(mobile) {
+      grid-column-start: 1;
+    }
+  }
+  li.enter-site {
+    grid-column-start: 3;
+    @include breakpoint(mobile) {
+      grid-column-start: 2;
+    }
+    color: white;
+    height: 100%;
+    div {
+      float: right;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      background-color: $jd-orange;
+      min-width: 150px;
+      max-width: 350px;
+      width: 100%;
+      height: 100%;
+      p {
+        font-size: 2.5rem;
+        @include breakpoint(mobile) {
+          font-size: 1.5rem;
+        }
+        font-weight: bold;
+        text-transform: uppercase;
+      }
+    }
+  }
+}
+
+/* ------------ ------------ ------------ ------------ ------------  */
+/* ------------- ----------- BURGERS ------------ ------------ */
+/* ------------ ------------ ------------ ------------ ------------  */
+
+/* Position and sizing of burger button */
+.bm-burger-button {
+  position: relative;
+  width: 30px;
+  height: 20px;
+  color: $jd-text-gray;
+  margin-left: 10px;
+
+  button {
+    color: $jd-text-gray;
+  }
+}
+
+/* Color/shape of burger icon bars */
+.bm-burger-bars {
+  background: $jd-text-gray;
+  width: 100%;
+}
+
+/* Position and sizing of clickable cross button */
+.bm-cross-button {
+  height: 24px;
+  width: 24px;
+}
+
+/* Color/shape of close button cross */
+.bm-cross {
+  background: #bdc3c7;
+}
+
+/* General sidebar styles */
+.bm-menu {
+  background: rgba(255, 255, 255, 0.95);
+  padding: 2.5em 1.5em 0;
+  font-size: 1.15em;
+}
+
+/* Morph shape necessary with bubble or elastic */
+.bm-morph-shape {
+  fill: #373a47;
+}
+
+/* Wrapper for item list */
+.bm-item-list {
+  color: #b8b7ad;
+  padding: 0.8em;
+}
+
+/* Individual item */
+.bm-item {
+  display: inline-block;
+  color: $jd-dark-blue;
+  text-transform: uppercase;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  border-bottom: 1px solid $jd-dark-blue;
+
+  &:last-child {
+    border: none;
+  }
+
+  &:hover {
+    background-color: $jd-light-blue;
+    color: white;
+  }
+}
+
+/* Styling of overlay */
+.bm-overlay {
+  background: rgba(0, 0, 0, 0.3);
+}

@@ -1,0 +1,142 @@
+@import "includes/vars";
+
+.candidate-container {
+  width: 330px;
+  margin: 20px;
+}
+
+div.candidate {
+  height: 150px;
+  width: 340px;
+
+  div.headshot {
+    float: left;
+    width: 125px;
+    height: 150px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+
+    div.office {
+      background-color: $jd-light-blue;
+      width: 100%;
+      color: white;
+      font-weight: bold;
+      font-size: 20px;
+      height: 1.5em;
+      text-align: center;
+    }
+  }
+
+  div.meta {
+    user-select: none;
+    float: right;
+    width: 215px;
+    padding-left: 10px;
+
+    div.nameIncumbent {
+      span.name {
+        font-weight: bold;
+        font-size: 20px;
+        line-height: 1;
+      }
+      span.incumbent {
+        margin-left: 0.5rem;
+        font-weight: normal;
+        color: $jd-light-blue;
+      }
+    }
+
+    div.office {
+      font-weight: bold;
+      font-size: 20px;
+      color: $jd-light-blue;
+    }
+    div.race-date {
+      font-size: 15px;
+
+      span.race {
+        font-weight: bold;
+        margin-right: 0.5rem;
+      }
+      span.date {
+        margin-left: 0.5rem;
+      }
+    }
+
+    .links-container {
+      display: flex;
+      justify-content: space-between;
+      width: 70px;
+
+      a {
+        height: 30px;
+        width: 30px;
+
+        img {
+          height: 100%;
+        }
+      }
+    }
+
+    .read-more {
+      cursor: pointer;
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+      margin-top: 5px;
+      font-size: 15px;
+
+      img {
+        height: 15px;
+        width: 15px;
+        margin-right: 5px;
+      }
+    }
+  }
+}
+
+.candidate-blurb {
+  width: 340px;
+  font-size: 16px;
+}
+
+.carousel-container {
+  height: 300px;
+  display: table-row;
+  border-spacing: 5px;
+}
+
+.carousel-candidate {
+  display: table-cell;
+  margin-left: 10px;
+  margin-right: 10px;
+  width: 150px;
+  height: 300px;
+  text-align: center;
+  font-size: 17px;
+
+  .name {
+    height: 90px;
+  }
+
+  .carousel-headshot {
+    height: 150px;
+    width: 150px;
+    background-size: cover;
+  }
+
+  .banner {
+    height: 30px;
+  }
+}
+
+.full-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}

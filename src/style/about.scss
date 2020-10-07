@@ -1,0 +1,65 @@
+@import "./includes/_vars";
+@import "includes/includes";
+
+.about-section-title {
+  text-align: left;
+  font-size: 25px;
+  margin-bottom: 10px;
+}
+
+.leadership-container {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+
+  @include breakpoint(mobile) {
+    .leader {
+      width: 100% !important;
+    }
+  }
+
+  .leader {
+    width: 24%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+
+    .leader-info {
+      text-align: center;
+
+      .leader-name {
+        margin-top: 10px;
+        font-size: 18px;
+      }
+
+      .leader-title {
+        font-size: 14px;
+      }
+    }
+  }
+}
+
+.faq-section-title,
+.contact-section-title {
+  text-transform: uppercase;
+  font-size: 18px;
+  margin-bottom: 10px;
+  margin-top: 20px;
+}
+
+.contact-email {
+  font-weight: bold;
+}
+
+.answer {
+  margin-top: 10px;
+  margin-bottom: 20px;
+}
+
+.contact-contents {
+  .columns {
+    margin: 0px;
+  }
+}
